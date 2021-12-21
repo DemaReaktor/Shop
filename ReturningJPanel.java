@@ -4,12 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 
-public class OrderJPanel extends JPanel {
+public class ReturningJPanel extends JPanel {
     private HashMap<String, Integer> Goods;
     private MainJFrame mainJFrame;
     private JButton nameButton;
 
-    public OrderJPanel(MainJFrame mainJFrame) {
+    public ReturningJPanel(MainJFrame mainJFrame) {
         this.mainJFrame = mainJFrame;
 
         Goods = new HashMap<String, Integer>();
@@ -17,6 +17,20 @@ public class OrderJPanel extends JPanel {
 
         Box generalBox = Box.createVerticalBox();
         generalBox.setVisible(true);
+
+        Box checkBox = Box.createHorizontalBox();
+
+        JLabel checkLabel = new JLabel("код чеку");
+        checkLabel.setVisible(true);
+        checkBox.add(checkLabel);
+
+        JTextField checkText = new JTextField(10);
+        checkText.setText("1");
+        checkText.setVisible(true);
+        checkBox.add(checkText);
+
+        checkBox.setVisible(true);
+        generalBox.add(checkBox);
 
         Box goodBox = Box.createHorizontalBox();
 
@@ -75,11 +89,11 @@ public class OrderJPanel extends JPanel {
                 try {
                     count = Integer.parseInt(countText.getText());
                 } catch (Exception exception) {
-                    new ErrorDialog("введені дані у полі 'кількість' не є додатнім числом.");
+                    new ErrorDialog("введені дані у поле 'кількість' не є додатнім числом.");
                     return;
                 }
                 if (count <= 0) {
-                    new ErrorDialog("введені дані у полі 'кількість' не є додатнім числом.");
+                    new ErrorDialog("введені дані у поле 'кількість' не є додатнім числом.");
                     return;
                 }
                 if (Goods.containsKey(name)) {
@@ -98,15 +112,25 @@ public class OrderJPanel extends JPanel {
         addButton.setVisible(true);
         generalBox.add(addButton);
 
-        JButton orderButton = new JButton("замовити");
-        orderButton.addActionListener(new ActionListener() {
+        JButton returnButton = new JButton("повернути");
+        returnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                int checkCode;
+                try {
+                    checkCode = Integer.parseInt(checkText.getText());
+                } catch (Exception exception) {
+                    new ErrorDialog("введені дані у полі 'код чеку' не є додатнім числом.");
+                    return;
+                }
+                if (checkCode <= 0) {
+                    new ErrorDialog("введені дані у полі 'код чеку' не є додатнім числом.");
+                    return;
+                }
             }
         });
-        orderButton.setVisible(true);
-        generalBox.add(orderButton);
+        returnButton.setVisible(true);
+        generalBox.add(returnButton);
 
         add("North", generalBox);
         setVisible(true);
@@ -134,3 +158,5 @@ public class OrderJPanel extends JPanel {
         nameButton.setText(name);
     }
 }
+
+

@@ -3,18 +3,18 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class EnterJFrame extends JFrame{
+public class EnterJFrame extends JFrame {
     private JTextField nameText;
     private JTextField PasswordText;
     private MainJFrame mainWindow;
 
-    public EnterJFrame(MainJFrame mainWindow){
+    public EnterJFrame(MainJFrame mainWindow) {
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         this.mainWindow = mainWindow;
-        setSize(550,100);
-        setLocation(new Point(Toolkit.getDefaultToolkit().getScreenSize().width/2-275,
-                Toolkit.getDefaultToolkit().getScreenSize().height/2-50));
-        JPanel panel= new JPanel();
+        setSize(550, 100);
+        setLocation(new Point(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 275,
+                Toolkit.getDefaultToolkit().getScreenSize().height / 2 - 50));
+        JPanel panel = new JPanel();
         add(panel);
 
         panel.add(new JLabel("Ім'я"));
@@ -26,7 +26,7 @@ public class EnterJFrame extends JFrame{
         PasswordText.setVisible(true);
         panel.add(PasswordText);
 
-         JButton signUpButton = new JButton("увійти");
+        JButton signUpButton = new JButton("увійти");
         signUpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -34,7 +34,7 @@ public class EnterJFrame extends JFrame{
             }
         });
         signUpButton.setVisible(true);
-         panel.add(signUpButton);
+        panel.add(signUpButton);
 
         JButton exitButton = new JButton("скасувати");
         exitButton.addActionListener(new ActionListener() {
@@ -51,12 +51,13 @@ public class EnterJFrame extends JFrame{
         mainWindow.setEnabled(false);
     }
 
-public void enter(){
+    public void enter() {
 //if password == name.password
-    mainWindow.setActiveSeller(nameText.getText());
-    exit();
+        mainWindow.setActiveSeller(nameText.getText());
+        exit();
     }
-    public void exit(){
+
+    public void exit() {
         mainWindow.setEnabled(true);
         this.setVisible(false);
     }
